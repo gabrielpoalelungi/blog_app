@@ -1,0 +1,185 @@
+  [1m[35m (2.9ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (5.5ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" varchar NOT NULL PRIMARY KEY)[0m
+  [1m[35m (4.3ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" varchar NOT NULL PRIMARY KEY, "value" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to CreatePosts (20200830163800)
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE TABLE "posts" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "title" varchar, "body" text, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[36mprimary::SchemaMigration Create (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20200830163800"]]
+  [1m[35m (11.5ms)[0m  [1m[36mcommit transaction[0m
+Migrating to CreateComments (20200830163816)
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (5.0ms)[0m  [1m[35mCREATE TABLE "comments" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "post_id" integer NOT NULL, "body" text, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, CONSTRAINT "fk_rails_2fd19c0db7"
+FOREIGN KEY ("post_id")
+  REFERENCES "posts" ("id")
+)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE  INDEX "index_comments_on_post_id" ON "comments" ("post_id")[0m
+  [1m[36mprimary::SchemaMigration Create (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20200830163816"]]
+  [1m[35m (5.7ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Create (3.6ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["key", "environment"], ["value", "development"], ["created_at", "2020-08-30 16:38:31.296485"], ["updated_at", "2020-08-30 16:38:31.296485"]]
+  [1m[35m (5.7ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+DEPRECATION WARNING: Using `bin/rake routes` is deprecated and will be removed in Rails 6.1. Use `bin/rails routes` instead.
+ (called from block in execute at /home/student/.rvm/rubies/ruby-2.7.1/lib/ruby/gems/2.7.0/gems/rake-13.0.1/lib/rake/task.rb:281)
+Started GET "/" for 127.0.0.1 at 2020-08-30 19:39:23 +0300
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by Rails::WelcomeController#index as HTML
+  Rendering /home/student/.rvm/gems/ruby-2.7.1/gems/railties-6.0.3.2/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered /home/student/.rvm/gems/ruby-2.7.1/gems/railties-6.0.3.2/lib/rails/templates/rails/welcome/index.html.erb (Duration: 14.2ms | Allocations: 407)
+Completed 200 OK in 61ms (Views: 36.3ms | ActiveRecord: 0.0ms | Allocations: 2342)
+
+
+Started GET "/posts" for 127.0.0.1 at 2020-08-30 19:39:53 +0300
+Processing by PostsController#index as HTML
+  Rendering posts/index.html.erb within layouts/application
+  [1m[36mPost Load (0.5ms)[0m  [1m[34mSELECT "posts".* FROM "posts"[0m
+  ↳ app/views/posts/index.html.erb:15
+  Rendered posts/index.html.erb within layouts/application (Duration: 3.7ms | Allocations: 1337)
+[Webpacker] Compiling...
+[Webpacker] Compiled all packs in /home/student/workplace/blog/public/packs
+[Webpacker] Hash: 15d1bb7b54cf6326b9ba
+Version: webpack 4.44.1
+Time: 3032ms
+Built at: 08/30/2020 7:39:57 PM
+                                     Asset       Size       Chunks                         Chunk Names
+    js/application-9afcbb5693aa87623e69.js    124 KiB  application  [emitted] [immutable]  application
+js/application-9afcbb5693aa87623e69.js.map    139 KiB  application  [emitted] [dev]        application
+                             manifest.json  364 bytes               [emitted]              
+Entrypoint application = js/application-9afcbb5693aa87623e69.js js/application-9afcbb5693aa87623e69.js.map
+[./app/javascript/channels sync recursive _channel\.js$] ./app/javascript/channels sync _channel\.js$ 160 bytes {application} [built]
+[./app/javascript/channels/index.js] 211 bytes {application} [built]
+[./app/javascript/packs/application.js] 749 bytes {application} [built]
+[./node_modules/webpack/buildin/module.js] (webpack)/buildin/module.js 552 bytes {application} [built]
+    + 3 hidden modules
+
+Completed 200 OK in 4801ms (Views: 4792.8ms | ActiveRecord: 0.8ms | Allocations: 25273)
+
+
+Started GET "/posts/new" for 127.0.0.1 at 2020-08-30 19:39:59 +0300
+Processing by PostsController#new as HTML
+  Rendering posts/new.html.erb within layouts/application
+  Rendered posts/_form.html.erb (Duration: 39.0ms | Allocations: 4340)
+  Rendered posts/new.html.erb within layouts/application (Duration: 42.8ms | Allocations: 4676)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 73ms (Views: 58.5ms | ActiveRecord: 4.0ms | Allocations: 10929)
+
+
+Started POST "/posts" for 127.0.0.1 at 2020-08-30 19:40:09 +0300
+Processing by PostsController#create as HTML
+  Parameters: {"authenticity_token"=>"l0LbN9Z1JHQ9SX405YGYRXlueiKZZoLLiw0Ow3EEkPdirMFr5NCePmM1qMqqBkjQEe8VFdwv0PO/QKYRH8DuUg==", "post"=>{"title"=>"Cloud-based Widgets", "body"=>"Bla bla bla"}, "commit"=>"Create Post"}
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/posts_controller.rb:30:in `block in create'
+  [1m[36mPost Create (1.9ms)[0m  [1m[32mINSERT INTO "posts" ("title", "body", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["title", "Cloud-based Widgets"], ["body", "Bla bla bla"], ["created_at", "2020-08-30 16:40:09.944617"], ["updated_at", "2020-08-30 16:40:09.944617"]]
+  ↳ app/controllers/posts_controller.rb:30:in `block in create'
+  [1m[35m (5.6ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/posts_controller.rb:30:in `block in create'
+Redirected to http://localhost:3000/posts/1
+Completed 302 Found in 22ms (ActiveRecord: 7.6ms | Allocations: 3922)
+
+
+Started GET "/posts/1" for 127.0.0.1 at 2020-08-30 19:40:09 +0300
+Processing by PostsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mPost Load (0.2ms)[0m  [1m[34mSELECT "posts".* FROM "posts" WHERE "posts"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/posts_controller.rb:67:in `set_post'
+  Rendering posts/show.html.erb within layouts/application
+  Rendered posts/show.html.erb within layouts/application (Duration: 1.1ms | Allocations: 252)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 30ms (Views: 6.5ms | ActiveRecord: 0.2ms | Allocations: 4748)
+
+
+Started GET "/posts" for 127.0.0.1 at 2020-08-30 19:40:14 +0300
+Processing by PostsController#index as HTML
+  Rendering posts/index.html.erb within layouts/application
+  [1m[36mPost Load (0.1ms)[0m  [1m[34mSELECT "posts".* FROM "posts"[0m
+  ↳ app/views/posts/index.html.erb:15
+  Rendered posts/index.html.erb within layouts/application (Duration: 5.4ms | Allocations: 766)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 16ms (Views: 15.2ms | ActiveRecord: 0.1ms | Allocations: 4173)
+
+
+Started GET "/posts/1" for 127.0.0.1 at 2020-08-30 19:40:21 +0300
+Processing by PostsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mPost Load (0.2ms)[0m  [1m[34mSELECT "posts".* FROM "posts" WHERE "posts"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/posts_controller.rb:67:in `set_post'
+  Rendering posts/show.html.erb within layouts/application
+  Rendered posts/show.html.erb within layouts/application (Duration: 0.2ms | Allocations: 81)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 16ms (Views: 12.1ms | ActiveRecord: 0.2ms | Allocations: 4008)
+
+
+Started GET "/comments/new" for 127.0.0.1 at 2020-08-30 19:40:38 +0300
+Processing by CommentsController#new as HTML
+  Rendering comments/new.html.erb within layouts/application
+  Rendered comments/_form.html.erb (Duration: 4.8ms | Allocations: 1120)
+  Rendered comments/new.html.erb within layouts/application (Duration: 6.1ms | Allocations: 1442)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 37ms (Views: 13.6ms | ActiveRecord: 1.0ms | Allocations: 9076)
+
+
+Started POST "/comments" for 127.0.0.1 at 2020-08-30 19:40:48 +0300
+Processing by CommentsController#create as HTML
+  Parameters: {"authenticity_token"=>"PYxHNH7bq0pYgnavM5L69pODkfoQr4A4euTP3ozomAxBWtQRUkcv84BlkZJVfSKS3JfX4z0b04DV8UC1fnaYjQ==", "comment"=>{"post_id"=>"1", "body"=>"This is great!\r\n"}, "commit"=>"Create Comment"}
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/comments_controller.rb:30:in `block in create'
+  [1m[36mPost Load (0.1ms)[0m  [1m[34mSELECT "posts".* FROM "posts" WHERE "posts"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/comments_controller.rb:30:in `block in create'
+  [1m[36mComment Create (1.7ms)[0m  [1m[32mINSERT INTO "comments" ("post_id", "body", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["post_id", 1], ["body", "This is great!\r\n"], ["created_at", "2020-08-30 16:40:48.115144"], ["updated_at", "2020-08-30 16:40:48.115144"]]
+  ↳ app/controllers/comments_controller.rb:30:in `block in create'
+  [1m[35m (7.7ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/comments_controller.rb:30:in `block in create'
+Redirected to http://localhost:3000/comments/1
+Completed 302 Found in 52ms (ActiveRecord: 9.6ms | Allocations: 8030)
+
+
+Started GET "/comments/1" for 127.0.0.1 at 2020-08-30 19:40:48 +0300
+Processing by CommentsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mComment Load (0.2ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/comments_controller.rb:67:in `set_comment'
+  Rendering comments/show.html.erb within layouts/application
+  Rendered comments/show.html.erb within layouts/application (Duration: 1.1ms | Allocations: 248)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 9ms (Views: 6.6ms | ActiveRecord: 0.2ms | Allocations: 4452)
+
+
+Started GET "/comments" for 127.0.0.1 at 2020-08-30 19:40:53 +0300
+Processing by CommentsController#index as HTML
+  Rendering comments/index.html.erb within layouts/application
+  [1m[36mComment Load (0.2ms)[0m  [1m[34mSELECT "comments".* FROM "comments"[0m
+  ↳ app/views/comments/index.html.erb:15
+  Rendered comments/index.html.erb within layouts/application (Duration: 6.5ms | Allocations: 1027)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 18ms (Views: 16.8ms | ActiveRecord: 0.2ms | Allocations: 4562)
+
+
+Started DELETE "/comments/1" for 127.0.0.1 at 2020-08-30 19:40:59 +0300
+Processing by CommentsController#destroy as HTML
+  Parameters: {"authenticity_token"=>"tee76TtXIIhcVNF3EKZw6KtD7fjjoT3U6iu8lNTuhKHJMSjMF8ukMYSzNkp2SaiM5Fer4c4VbmxFPjP/JnCEIA==", "id"=>"1"}
+  [1m[36mComment Load (0.1ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/comments_controller.rb:67:in `set_comment'
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/comments_controller.rb:57:in `destroy'
+  [1m[36mComment Destroy (1.0ms)[0m  [1m[31mDELETE FROM "comments" WHERE "comments"."id" = ?[0m  [["id", 1]]
+  ↳ app/controllers/comments_controller.rb:57:in `destroy'
+  [1m[35m (3.1ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/comments_controller.rb:57:in `destroy'
+Redirected to http://localhost:3000/comments
+Completed 302 Found in 17ms (ActiveRecord: 4.2ms | Allocations: 3716)
+
+
+Started GET "/comments" for 127.0.0.1 at 2020-08-30 19:40:59 +0300
+Processing by CommentsController#index as HTML
+  Rendering comments/index.html.erb within layouts/application
+  [1m[36mComment Load (0.1ms)[0m  [1m[34mSELECT "comments".* FROM "comments"[0m
+  ↳ app/views/comments/index.html.erb:15
+  Rendered comments/index.html.erb within layouts/application (Duration: 2.6ms | Allocations: 637)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 16ms (Views: 15.2ms | ActiveRecord: 0.1ms | Allocations: 4063)
+
+
